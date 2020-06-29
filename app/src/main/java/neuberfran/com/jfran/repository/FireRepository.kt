@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 import neuberfran.com.jfran.model.FireFran
 import neuberfran.com.jfran.model.FireFranB
 
-class FireRepository { // private constructor() {
+class FireRepository  private constructor() {
 
     private val mFirestore:FirebaseFirestore
 
