@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">JThings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">JThings</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="str_please_sign_in">Please sign in:</string>
+    <string name="str_sign_out">Sign out</string>
+    <string name="str_products">Commands</string>
+    <string name="str_name">Name:</string>
+</resources>
