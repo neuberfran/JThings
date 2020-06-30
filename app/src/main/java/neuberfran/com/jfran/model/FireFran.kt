@@ -14,14 +14,17 @@ class FireFran {
         var FIELD_gpioalarmstate  = "gpioalarmstate"
         var FIELD_gpiogaragestate = "gpiogaragestate"
     }
-
-    var id: String? = null
-    var userId: String? = null
+//
+//    var id: String? = null
+//    var userId: String? = null
 
     var alarmstate: Boolean  = false
     var garagestate: Boolean = false
 
     var gpioalarmstate: Boolean  = false
     var gpiogaragestate: Boolean  = false
+
+    var id: String? = null
+    var userId: String? = null
 
 }

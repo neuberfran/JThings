@@ -82,7 +82,7 @@ class FireRepository  private constructor() {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                val firefran = snapshot.toObject(FireFran::class.java)
+                var firefran = snapshot.toObject(FireFran::class.java)
                 firefran!!.id = snapshot.id
                 liveProject.postValue(firefran)
             } else {
@@ -104,12 +104,12 @@ class FireRepository  private constructor() {
             withContext(Dispatchers.Main) {
 
                 if (gpioAlarm!!) {
-                    val data1 = hashMapOf("gpioalarmstate" to true)
+                    val data1 = hashMapOf("gpioalarmstate" to false)
                     mFirestore.collection(FireFran.COLLECTION).document("tutorial")
                         .set(data1 , SetOptions.merge())
                 }
                 if (!gpioAlarm!!) {
-                    val data2 = hashMapOf("gpioalarmstate" to false)
+                    val data2 = hashMapOf("gpioalarmstate" to true)
                     mFirestore.collection(FireFran.COLLECTION).document("tutorial")
                         .set(data2 , SetOptions.merge())
                 }
@@ -130,12 +130,12 @@ class FireRepository  private constructor() {
             withContext(Dispatchers.Main) {
 
                 if (gpioGarage!!) {
-                    val data3 = hashMapOf("gpiogaragestate" to true)
+                    val data3 = hashMapOf("gpiogaragestate" to false)
                     mFirestore.collection(FireFran.COLLECTION).document("tutorial")
                         .set(data3 , SetOptions.merge())
                 }
                 if (!gpioGarage!!) {
-                    val data4 = hashMapOf("gpiogaragestate" to false)
+                    val data4 = hashMapOf("gpiogaragestate" to true)
                     mFirestore.collection(FireFran.COLLECTION).document("tutorial")
                         .set(data4 , SetOptions.merge())
                 }
