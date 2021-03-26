@@ -1,3 +1,5 @@
+package neuberfran.com.jfran.model
+
 import neuberfran.com.jfran.viewmodel.FireViewModel
 
 class FireFran {
@@ -8,6 +10,8 @@ class FireFran {
         var DOCUMENT = "alarme"
         var FIELD_userId = "userId"
     }
+
+
     var alarmstate: Boolean  = false
     var garagestate: Boolean = false
     var id: String? = null
