@@ -37,11 +37,11 @@ class FireFragment : Fragment() {
 
         binding = IotEstadoBinding.inflate(inflater , container , false)
 
-        iotestadoViewModel!!.getFireFranById("tutorial").observe(viewLifecycleOwner , Observer { firefran ->
+        iotestadoViewModel!!.getFireFranById("garagem").observe(viewLifecycleOwner , Observer { firefran ->
             if (firefran != null) {
-                //       productAdapter?.setProducts(products)
+                //       productAdapter?.setdevice-configs(device-configs)
                 binding.setLifecycleOwner(getActivity())
-                //          productAdapter?.setProducts(products)
+                //          productAdapter?.setdevice-configs(device-configs)
                 binding.viewmodel = iotestadoViewModel
             }
         })
@@ -52,7 +52,7 @@ class FireFragment : Fragment() {
 
 //        iotestadoViewModel.allFireFrans.observe(viewLifecycleOwner, Observer {firefrans ->
 //            if (firefrans != null) {
-//             //   productAdapter?.setProducts(products)
+//             //   productAdapter?.setdevice-configs(device-configs)
 //
 //            }
 //        })
@@ -65,9 +65,9 @@ class FireFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-//        iotestadoViewModel!!.allProducts.observe(this , Observer { products ->
-//            if (products != null) {
-//         //       productAdapter?.setProducts(products)
+//        iotestadoViewModel!!.alldevice-configs.observe(this , Observer { device-configs ->
+//            if (device-configs != null) {
+//         //       productAdapter?.setdevice-configs(device-configs)
 //                binding.setLifecycleOwner(getActivity())
 //                binding.viewmodel = iotestadoViewModel
 //            }

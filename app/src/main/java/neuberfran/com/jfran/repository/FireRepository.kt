@@ -15,19 +15,18 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import neuberfran.com.jfran.model.FireFran
-import neuberfran.com.jfran.model.FireFranB
 
 class FireRepository  private constructor() {
 
     private val mFirestore:FirebaseFirestore
 
-//    val data1 = hashMapOf("gpioalarmstate" to true)
+//    val data1 = hashMapOf("value.on" to true)
 //
-//    val data2 = hashMapOf("gpioalarmstate" to false)
+//    val data2 = hashMapOf("value.on" to false)
 //
-//    val data3 = hashMapOf("gpiogaragestate" to true)
+//    val data3 = hashMapOf("value.openPercent" to 100)
 //
-//    val data4 = hashMapOf("gpiogaragestate" to false)
+//    val data4 = hashMapOf("value.openPercent" to 0)
 
     private var firefransb: FireFran? = null
 
@@ -82,7 +81,7 @@ class FireRepository  private constructor() {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                var firefran = snapshot.toObject(FireFran::class.java)
+                val firefran = snapshot.toObject(FireFran::class.java)
                 firefran!!.id = snapshot.id
                 liveProject.postValue(firefran)
             } else {
@@ -95,22 +94,22 @@ class FireRepository  private constructor() {
 
     fun changeValueGpioAlarm() {
 
-        val tutorialDocument = mFirestore.collection(FireFran.COLLECTION)
-            .document("tutorial")
+        val alarmeDocument = mFirestore.collection(FireFran.COLLECTION)
+            .document("alarme")
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            val gpioAlarm = tutorialDocument.get().await().toObject(FireFran::class.java)?.gpioalarmstate
+            val gpioAlarm = alarmeDocument.get().await().toObject(FireFran::class.java)?.value?.on
             withContext(Dispatchers.Main) {
 
                 if (gpioAlarm!!) {
-                    val data1 = hashMapOf("gpioalarmstate" to false)
-                    mFirestore.collection(FireFran.COLLECTION).document("tutorial")
+                    val data1 = hashMapOf("value.on" to false)
+                    mFirestore.collection(FireFran.COLLECTION).document("alarme")
                         .set(data1 , SetOptions.merge())
                 }
                 if (!gpioAlarm!!) {
-                    val data2 = hashMapOf("gpioalarmstate" to true)
-                    mFirestore.collection(FireFran.COLLECTION).document("tutorial")
+                    val data2 = hashMapOf("value.on" to true)
+                    mFirestore.collection(FireFran.COLLECTION).document("alarme")
                         .set(data2 , SetOptions.merge())
                 }
             }
@@ -119,24 +118,24 @@ class FireRepository  private constructor() {
 
     fun changeValueGpioGarage() {
 
-        val tutorialDocument = mFirestore.collection(FireFran.COLLECTION)
-            .document("tutorial")
+        val garagemDocument = mFirestore.collection(FireFran.COLLECTION)
+            .document("garagem")
 
         GlobalScope.launch(Dispatchers.IO) {
 
-            //      tutorialDocument.set(peter).await()
+            //      garagemDocument.set(peter).await()
 
-            val gpioGarage = tutorialDocument.get().await().toObject(FireFran::class.java)?.gpiogaragestate
+            val gpioGarage = garagemDocument.get().await().toObject(FireFran::class.java)?.value?.openPercent
             withContext(Dispatchers.Main) {
 
-                if (gpioGarage!!) {
-                    val data3 = hashMapOf("gpiogaragestate" to false)
-                    mFirestore.collection(FireFran.COLLECTION).document("tutorial")
+                if (gpioGarage == 100) {
+                    val data3 = hashMapOf("value.openPercent" to 0)
+                    mFirestore.collection(FireFran.COLLECTION).document("garagem")
                         .set(data3 , SetOptions.merge())
                 }
-                if (!gpioGarage!!) {
-                    val data4 = hashMapOf("gpiogaragestate" to true)
-                    mFirestore.collection(FireFran.COLLECTION).document("tutorial")
+                if (gpioGarage == 0) {
+                    val data4 = hashMapOf("value.openPercent" to 100)
+                    mFirestore.collection(FireFran.COLLECTION).document("garagem")
                         .set(data4 , SetOptions.merge())
                 }
             }

@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
         navigationView.setNavigationItemSelectedListener(this)
 
         if (savedInstanceState == null) {
-            displayFragment(R.id.nav_products)
+            displayFragment(R.id.nav_deviceconfigs)
         }
 
         setActionBarArrowDependingOnFragmentsBackStack()
@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
 
         try {
             when (fragmentId) {
-                R.id.nav_products -> {
+                R.id.nav_deviceconfigs -> {
                     fragmentClass = FireFragment::class.java
                     fragment = fragmentClass.newInstance() as Fragment
                 }

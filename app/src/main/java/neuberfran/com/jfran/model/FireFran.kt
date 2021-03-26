@@ -3,28 +3,21 @@ package neuberfran.com.jfran.model
 import neuberfran.com.jfran.viewmodel.FireViewModel
 
 class FireFran {
-
+    var value: FireFranValue = FireFranValue(false, 0)
     companion object Factory {
         fun create() :FireViewModel = FireViewModel()
-        var COLLECTION = "products"
-        var DOCUMENT = "tutorial"
+        var COLLECTION = "device-configs"
+        var DOCUMENT = "alarme"
         var FIELD_userId = "userId"
-        var FIELD_alarmstate  = "alarmstate"
-        var FIELD_garagestate = "garagestate"
-        var FIELD_gpioalarmstate  = "gpioalarmstate"
-        var FIELD_gpiogaragestate = "gpiogaragestate"
     }
-//
-//    var id: String? = null
-//    var userId: String? = null
+
 
     var alarmstate: Boolean  = false
     var garagestate: Boolean = false
-
-    var gpioalarmstate: Boolean  = false
-    var gpiogaragestate: Boolean  = false
-
     var id: String? = null
     var userId: String? = null
-
 }
+data class FireFranValue(
+    val on: Boolean,
+    val openPercent: Number
+)

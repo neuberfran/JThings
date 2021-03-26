@@ -23,7 +23,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{viewmodel.getFireFranById("tutorial").alarmstate ? "Ligado" : "Desligado"}'
+            android:text='@{viewmodel.getFireFranById("alarme").alarmstate ? "Ligado" : "Desligado"}'
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{viewmodel.getFireFranById("tutorial").garagestate ? "Aberto" : "Fechado"}'
+            android:text='@{viewmodel.getFireFranById("garagem").garagestate ? "Aberto" : "Fechado"}'
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
