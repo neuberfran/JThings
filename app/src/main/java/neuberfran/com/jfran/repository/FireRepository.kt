@@ -20,13 +20,13 @@ class FireRepository  private constructor() {
 
     private val mFirestore:FirebaseFirestore
 
-//    val data1 = hashMapOf("value.on" to true)
-//
-//    val data2 = hashMapOf("value.on" to false)
-//
-//    val data3 = hashMapOf("value.openPercent" to 100)
-//
-//    val data4 = hashMapOf("value.openPercent" to 0)
+    val data1 = hashMapOf("value.on" to true)
+
+    val data2 = hashMapOf("value.on" to false)
+
+    val data3 = hashMapOf("valorb.openPercent" to 100)
+
+    val data4 = hashMapOf("valorb.openPercent" to 0)
 
     private var firefransb: FireFran? = null
 
@@ -81,7 +81,7 @@ class FireRepository  private constructor() {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                val firefran = snapshot.toObject(FireFran::class.java)
+                var firefran = snapshot.toObject(FireFran::class.java)
                 firefran!!.id = snapshot.id
                 liveProject.postValue(firefran)
             } else {
@@ -125,16 +125,16 @@ class FireRepository  private constructor() {
 
             //      garagemDocument.set(peter).await()
 
-            val gpioGarage = garagemDocument.get().await().toObject(FireFran::class.java)?.value?.openPercent
+            val gpioGarage = garagemDocument.get().await().toObject(FireFran::class.java)?.valorb?.openPercent
             withContext(Dispatchers.Main) {
 
                 if (gpioGarage == 100) {
-                    val data3 = hashMapOf("value.openPercent" to 0)
+                    val data3 = hashMapOf("valorb.openPercent" to 0)
                     mFirestore.collection(FireFran.COLLECTION).document("garagem")
                         .set(data3 , SetOptions.merge())
                 }
                 if (gpioGarage == 0) {
-                    val data4 = hashMapOf("value.openPercent" to 100)
+                    val data4 = hashMapOf("valorb.openPercent" to 100)
                     mFirestore.collection(FireFran.COLLECTION).document("garagem")
                         .set(data4 , SetOptions.merge())
                 }
