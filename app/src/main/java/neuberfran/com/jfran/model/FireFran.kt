@@ -7,9 +7,8 @@ class FireFran(
     var id: String? = null,
     var userId: String? = null,
     var owner: String? = null,
-    var value: FireFranValue = FireFranValue(false),
-    var valorb: FireFranValueB = FireFranValueB(openPercent = 0)
-
+    var value: FireFranValue? = null,
+    var valorb: FireFranValueB? = null
 ){
     companion object Factory {
         fun create() :FireViewModel = FireViewModel()
@@ -18,11 +17,10 @@ class FireFran(
         var FIELD_userId = "userId"
     }
 }
-
 data class FireFranValue(
-    var on: Boolean // = false
+    var on: Boolean? = null
 )
 
 data class FireFranValueB(
-    var openPercent: Number // = 0
+    var openPercent: Number? = null
 )
