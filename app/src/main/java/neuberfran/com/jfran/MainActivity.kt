@@ -3,7 +3,6 @@ package neuberfran.com.jfran
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import com.google.android.material.appbar.AppBarLayout
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -194,7 +193,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 }
             }
         } catch (e: Exception) {
-            Log.e(TAG , e.message)
+            e.message?.let { Log.e(TAG , it) }
         }
 
         if (fragment != null) {

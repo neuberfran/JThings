@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import neuberfran.com.jfran.model.FireFran
+import neuberfran.com.jfran.model.FireFranB
 
 class FireRepository private constructor() {
 
@@ -28,6 +29,7 @@ class FireRepository private constructor() {
     init {
         _changeGpio.value = false
     }
+
     init {
         mFirestore = FirebaseFirestore.getInstance()
     }
@@ -38,8 +40,7 @@ class FireRepository private constructor() {
 
             mFirestore.collection(FireFran.COLLECTION)
                 .whereEqualTo(
-                    FireFran.FIELD_userId
-                    , mFirebaseAuth!!.uid
+                    FireFran.FIELD_userId, mFirebaseAuth!!.uid
                 )
                 .orderBy("position", Query.Direction.ASCENDING)
                 .addSnapshotListener { snapshot, e ->
@@ -95,16 +96,14 @@ class FireRepository private constructor() {
                 alarmeDocument.get().await().toObject(FireFran::class.java)?.value?.get("on")
             withContext(Dispatchers.Main) {
 
-                if (gpioAlarm!!) {
-
-                    mFirestore.collection(FireFran.COLLECTION).document("alarme")
-                        .update(mapOf("value.on" to false))
-                }
-                if (!gpioAlarm!!) {
-
-                    mFirestore.collection(FireFran.COLLECTION).document("alarme")
-                        .update(mapOf("value.on" to true))
-                }
+                    if (gpioAlarm!!) {
+                        mFirestore.collection(FireFran.COLLECTION).document("alarme")
+                            .update(mapOf("value.on" to false))
+                    }
+                    if (!gpioAlarm!!) {
+                        mFirestore.collection(FireFran.COLLECTION).document("alarme")
+                            .update(mapOf("value.on" to true))
+                    }
             }
         }
     }

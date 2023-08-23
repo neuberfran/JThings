@@ -24,7 +24,7 @@ class FireRepositoryB private constructor() {
     val changeGpioB: LiveData<Boolean>
         get() = _changeGpioB
 
-   init {
+    init {
         _changeGpioB.value = false
     }
     init {
@@ -32,14 +32,12 @@ class FireRepositoryB private constructor() {
     }
 
     val firefransb: MutableLiveData<List<FireFranB>>
-
         get() {
             val liveFireFransB = MutableLiveData<List<FireFranB>>()
 
             mFirestore.collection(FireFranB.COLLECTION)
                 .whereEqualTo(
-                    FireFranB.FIELD_userId
-                    , mFirebaseAuth!!.uid
+                    FireFranB.FIELD_userId, mFirebaseAuth!!.uid
                 )
                 .orderBy("position", Query.Direction.ASCENDING)
                 .addSnapshotListener { snapshot, e ->
@@ -47,7 +45,6 @@ class FireRepositoryB private constructor() {
                         Log.w(TAG, "Listen failed.", e)
                         return@addSnapshotListener
                     }
-
                     val firefransb = ArrayList<FireFranB>()
                     if (snapshot != null && !snapshot.isEmpty) {
                         for (documentSnapshot in snapshot.documents) {
@@ -58,7 +55,6 @@ class FireRepositoryB private constructor() {
                     }
                     liveFireFransB.postValue(firefransb)
                 }
-
             return liveFireFransB
         }
 
@@ -83,32 +79,29 @@ class FireRepositoryB private constructor() {
 
         return liveProjectB
     }
-
     fun changeValueGpioGarage() {
-
         var garagemDocument = mFirestore.collection(FireFranB.COLLECTION)
             .document("garagem")
-
         GlobalScope.launch(Dispatchers.IO) {
-
             //      garagemDocument.set(peter).await()
-
             var gpioGarage = garagemDocument.get().await()
                 .toObject(FireFranB::class.java)?.value?.get("openPercent")
             withContext(Dispatchers.Main) {
 
                 if (gpioGarage == 0) {
                     mFirestore.collection(FireFranB.COLLECTION).document("garagem")
+                        .update(mapOf("gpiogaragestate" to true))
+                    mFirestore.collection(FireFranB.COLLECTION).document("garagem")
                         .update(mapOf("value.openPercent" to 100))
-                }
-                if (gpioGarage == 100) {
+                }else{
+                    mFirestore.collection(FireFranB.COLLECTION).document("garagem")
+                        .update(mapOf("gpiogaragestate" to true))
                     mFirestore.collection(FireFranB.COLLECTION).document("garagem")
                         .update(mapOf("value.openPercent" to 0))
                 }
             }
         }
     }
-
     // cada documento vira uma FireFran lista
     fun saveFireFranB(firefranb: FireFranB): String {
         val document: DocumentReference
@@ -119,16 +112,12 @@ class FireRepositoryB private constructor() {
             document = mFirestore.collection(FireFranB.COLLECTION).document()
         }
         document.set(firefranb)
-
         return document.id
     }
-
     companion object {
         private val TAG = "FireRepositoryB"
         private var mFirebaseAuth: FirebaseAuth? = null
-
         private var instance: FireRepositoryB? = null
-
         @Synchronized
         fun getInstance(): FireRepositoryB {
             if (instance == null) {

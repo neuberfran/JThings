@@ -29,7 +29,7 @@ class FireFragment : Fragment() {
         binding  = IotEstadoBinding.inflate(inflater , container , false)
         bindingB = IotEstadoBinding.inflate(inflater , container , false)
 
-        iotestadoViewModel.getFireFranById("alarme").observe(viewLifecycleOwner , Observer { firefranb ->
+        iotestadoViewModel.getFireFranById("alarme2").observe(viewLifecycleOwner , Observer { firefranb ->
             if (firefranb != null) {
                 //       productAdapter?.setdevice-configs(device-configs)
                 binding.setLifecycleOwner(getActivity())
@@ -42,7 +42,7 @@ class FireFragment : Fragment() {
             //       Toast.makeText(activity, it, Toast.LENGTH_SHORT).show()
         })
 
-        iotestadoViewModelB.getFireFranByIdB("garagem").observe(viewLifecycleOwner , Observer { firefranb ->
+        iotestadoViewModelB.getFireFranByIdB("garagem2").observe(viewLifecycleOwner , Observer { firefranb ->
             if (firefranb != null) {
                 //       productAdapter?.setdevice-configs(device-configs)
                 bindingB.setLifecycleOwner(getActivity())
